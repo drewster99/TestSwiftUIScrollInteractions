@@ -156,9 +156,7 @@ struct ContentView: View {
         }
     }
     var body: some View {
-        Self._printChanges()
-
-        return        VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 HStack {
                     Button {
@@ -189,12 +187,9 @@ struct ContentView: View {
                 .padding()
 
                 MyScrollerView(oldMessages: oldMessages, currentMessage: $currentMessage)
-
                     .onChange(of: junkGenerator.text) {
                         currentMessage = junkGenerator.text
                     }
-
-
                     .onAppear {
                         currentMessage = junkGenerator.text
                         start()
@@ -208,12 +203,12 @@ struct ContentView: View {
 struct MessageView: View {
     let message: String
     let isActive: Bool
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(message)
                 .multilineTextAlignment(.leading)
-
+            
             Button(role: .none) {
                 //
             } label: {
