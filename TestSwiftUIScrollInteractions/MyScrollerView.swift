@@ -53,15 +53,15 @@ struct MyScrollerView: View {
                     // The currently-stremaing message.  This one will change VERY often
                     MessageView(message: currentMessage, isActive: true)
                         .id(currentMessageNamespace)
-
-
+                }
+                .scrollTargetLayout()
+                .overlay(alignment: .bottom) {
                     Text("")
                         .onScrollVisibilityChange { visible in
                             isBottomOfScrollViewContentVisible = visible
                         }
-                        .id(bottomOfScrollView)
                 }
-                .scrollTargetLayout()
+                .id(bottomOfScrollView)
             }
             .onChange(of: oldMessages + [currentMessage]) {
                 // We got new content - if we can see the bottom of the
@@ -69,7 +69,6 @@ struct MyScrollerView: View {
                 // new content)
                 if isBottomOfScrollViewContentVisible {
                     scrollProxy.scrollTo(bottomOfScrollView, anchor: .bottom)
-
                 }
             }
         }
